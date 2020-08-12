@@ -1,0 +1,14 @@
+- name: Setup Sonar Qube Server
+  hosts: localhost
+  tasks:
+    - name:  Pull 
+      docker_image:
+        name: "sonarqube"
+    - name: Create a container from the jenkins docker image	
+    docker_container:
+      name: "sonarqube-server"
+      image: "sonarqube"
+      ports:
+      - "9000:9000"
+      state: present
+      recreate: no

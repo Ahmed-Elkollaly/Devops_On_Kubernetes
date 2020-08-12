@@ -1,0 +1,17 @@
+- name: Setup Jenkin Server
+  hosts: localhost
+  tasks:
+    - name:  Pull 
+      docker_image:
+        name: "2121994/jenkins-docker"
+    - name: Create a container from the jenkins docker image	
+      docker_container:
+        name: "jenkins-server"
+        image: "2121994/jenkins-docker"
+        ports:
+        - "8000:8080"
+        volumes:
+        - "/share/jenkins:/var/jenkins_home"
+        - "/var/run/docker.sock:/var/run/docker.sock"
+        state: present
+        recreate: no
